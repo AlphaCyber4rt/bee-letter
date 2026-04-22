@@ -151,7 +151,7 @@
 
         .bee-name {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.8rem;
+            font-size: 1.55rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--deep), var(--rose), var(--gold));
             background-size: 200% 200%;
@@ -159,7 +159,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: nameShimmer 4s ease infinite;
-            line-height: 1.1;
+            line-height: 1.35;
+            letter-spacing: 0.5px;
         }
 
         @keyframes nameShimmer {
@@ -305,7 +306,7 @@
 
         .final-message {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: var(--deep);
             line-height: 1.4;
             margin-bottom: 10px;
@@ -316,7 +317,25 @@
             font-style: italic;
             font-size: 0.85rem;
             color: var(--muted);
+            margin-top: 10px;
         }
+
+        .step-date {
+            font-size: 1.05rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        .step-body-bab3 {
+            margin: 14px 0;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        .step-body-bab3 small { color: var(--muted); }
 
         /* ═══ NAV BUTTONS ═══ */
         .nav-row {
@@ -414,7 +433,7 @@
     <div class="header">
         <span class="sender-tag">AlphaCyber4rt ✦</span>
         <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-            <span id="musicLabel">🎵 Play</span>
+            <span id="musicLabel">🎵 Putar Lagu</span>
             <div class="music-waves">
                 <div class="wave-bar" id="wb1"></div>
                 <div class="wave-bar" id="wb2"></div>
@@ -424,11 +443,10 @@
         </button>
     </div>
 
-    <!-- Bee Name -->
+    <!-- Main Title -->
     <div class="bee-name-wrap">
-        <p class="bee-label">Spesial untuk</p>
-        <h1 class="bee-name">Bee</h1>
-        <p class="bee-subtitle">Surat kecil yang terlalu lama tersimpan dalam hati 🍯</p>
+        <h1 class="bee-name">💌 HAL KECIL YANG KEBETULAN ADA KAMU DI DALAMNYA 💌</h1>
+        <p class="bee-subtitle">Klik aja… siapa tau kamu lagi butuh alasan buat senyum kecil 😏😜</p>
     </div>
 
     <!-- Progress -->
@@ -439,75 +457,67 @@
 
         <!-- STEP 1 -->
         <div class="step active" id="step1">
-            <div class="step-icon anim-pop">🌼</div>
+            <div class="step-icon anim-pop">👇</div>
             <p class="step-chapter anim-up">Halaman Pertama</p>
-            <h2 class="step-title anim-up-d1">Sejak Pertama Kali</h2>
-            <div class="step-body anim-up-d2">
-                Ada yang berubah diam-diam,<br>
-                sejak nama kamu mulai sering muncul di pikiranku. 🌸<br><br>
-                Bukan karena kamu sempurna —<br>
-                tapi justru karena cara kamu tertawa,<br>
-                cara kamu peduli, cara kamu <em>ada</em>...<br>
-                itu yang bikin aku susah pura-pura biasa. 🥺
-            </div>
-            <p class="step-quote anim-up-d3">"Kamu nggak tahu sudah berapa kali aku tersenyum sendiri gara-gara kamu." 💛</p>
+            <p class="step-date anim-up-d1">📅 Tanggal: Random, tapi kamu sering muncul di kepala tanpa izin 😶</p>
+            <p class="step-quote anim-up-d2">"Klik aja dulu, siapa tau kamu butuh ini hari ini… 😌"</p>
         </div>
 
         <!-- STEP 2 -->
         <div class="step" id="step2">
-            <div class="step-icon">🎶</div>
-            <p class="step-chapter">Halaman Kedua</p>
-            <h2 class="step-title">Hal-Hal Kecil tentang Kamu</h2>
+            <div class="step-icon">🎧</div>
+            <p class="step-chapter">💬 BAB 1</p>
+            <h2 class="step-title">Obrolan yang Nggak Pernah Ngejenuhin</h2>
             <div class="step-body">
-                💬 Cara kamu balas pesan — singkat, tapi selalu hangat<br><br>
-                ✨ Cara kamu bilang <em>"jaga diri ya"</em> — kayak nggak mau aku kenapa-kenapa<br><br>
-                🌙 Cara kamu ada di pikiran aku justru di saat paling sepi<br><br>
-                😌 Dan cara kamu bikin segalanya terasa lebih ringan,<br>
-                hanya dengan kehadiran kamu
+                <em>"Ngobrol sama kamu tuh kayak ngemil pas lagi nggak lapar..."</em><br><br>
+                😆 Niatnya bentar, ujungnya keterusan<br>
+                💤 Udah bilang mau tidur, tapi malah lanjut nunggu balasan<br>
+                😳 Kadang nggak jelas, tapi kok ya betah aja
             </div>
-            <p class="step-quote">"Hal-hal kecil tentang kamu, adalah hal-hal besar bagiku." 🌷</p>
+            <p class="step-quote">"Kita tuh nggak perlu topik penting… kamu bales aja udah cukup 😌"</p>
         </div>
 
         <!-- STEP 3 -->
         <div class="step" id="step3">
-            <div class="step-icon">💌</div>
-            <p class="step-chapter">Halaman Ketiga</p>
-            <h2 class="step-title">Yang Belum Pernah Aku Bilang</h2>
+            <div class="step-icon">💫</div>
+            <p class="step-chapter">🎢 BAB 2</p>
+            <h2 class="step-title">Momen-Momen Kecil yang Nggak Keliatan tapi Keinget</h2>
             <div class="step-body">
-                Aku nggak pernah bilang secara langsung,<br>
-                karena takut salah — takut merusak yang ada. 🫣<br><br>
-                Tapi kalau aku jujur,<br>
-                kamu adalah alasan aku rajin buka HP pagi-pagi. 📱💕<br><br>
-                Kamu adalah satu nama yang bikin notifikasi terasa berbeda.<br>
-                Dan kamu adalah orang yang diam-diam aku doakan setiap malam. 🌙✨
+                <em>"Aku nggak hafal semua obrolan kita, tapi..."</em><br><br>
+                💬 Aku inget kamu yang kadang hilang tanpa kabar… terus muncul lagi kayak nothing happened 😏<br>
+                🌃 Notif dari kamu tuh anehnya beda, kayak ada "efek khusus" di hati<br>
+                💭 Kadang cuma kata singkat dari kamu, tapi bisa ganggu pikiran seharian
             </div>
-            <p class="step-quote">"Bukan soal berani atau tidak. Tapi soal kamu yang terlalu berharga untuk disembunyikan." 🍯</p>
+            <p class="step-quote">"Bukan soal lama ngobrolnya… tapi kenapa rasanya selalu pengen lanjut 😄"</p>
         </div>
 
         <!-- STEP 4 (Final) -->
         <div class="step" id="step4">
-            <div class="final-seal">🐝</div>
-            <p class="step-chapter">Halaman Terakhir</p>
-            <div class="final-message">
-                Bee,<br>
-                semoga kamu selalu bahagia —<br>
-                dengan atau tanpa aku. 💛
+            <div class="final-seal">🌅</div>
+            <p class="step-chapter">🌅 BAB 3</p>
+            <div class="final-message">Status? Ya Santai Aja, Jangan Dipikirin 😆</div>
+            <div class="step-body step-body-bab3">
+                🕵️ Aku nggak nanya kita ini apa:<br>
+                <small>"Tapi kalau kamu tiba-tiba hilang, aku bisa jadi orang paling sibuk nyari alasan kenapa 😌🔍"</small><br><br>
+                🎁 Aku nggak ngasih sesuatu yang wah:<br>
+                <small>"Tapi perhatian kecilku selalu standby, nggak pernah off (kecuali kamu cuek 😏)"</small><br><br>
+                🎭 Aku juga nggak maksa jadi siapa-siapa:<br>
+                <small>"Tapi kalau ada yang deketin kamu… ya minimal aku jadi yang paling ganggu pikiran kamu 😏✨"</small>
             </div>
-            <div class="step-body" style="margin: 14px 0; text-align:center">
-                Aku mungkin cuma orang biasa di hidupmu.<br>
-                Tapi kamu, buat aku, bukan hal yang biasa. 🌟<br><br>
-                Makasih sudah ada,<br>
-                makasih sudah jadi <em>Bee</em>. 🍯✨
-            </div>
-            <p class="final-signature">— dengan sepenuh hati, seseorang yang peduli 🌸</p>
+            <p class="step-quote">
+                ❤️ Aku nggak janji selalu ada di waktu yang tepat…<br>
+                Tapi aku selalu bisa jadi alasan kecil kenapa<br>
+                kamu senyum tanpa sadar 😁✨
+            </p>
+            <p class="final-signature">— AlphaCyber4rt 🌸</p>
         </div>
 
     </div>
 
     <!-- Navigation -->
     <div class="nav-row">
-        <button class="btn btn-ghost" id="btnPrev" onclick="go(-1)">← Kembali</button>
-        <button class="btn btn-main"  id="btnNext" onclick="go(1)">Buka Halaman Berikutnya 💛</button>
+        <button type="button" class="btn btn-ghost" id="btnPrev" onclick="go(-1)">← Kembali</button>
+        <button type="button" class="btn btn-main"  id="btnNext" onclick="go(1)">Buka Halaman Berikutnya 💛</button>
     </div>
 </div>
 
@@ -586,10 +596,10 @@ let current   = 1;
 let animating = false;
 
 const NEXT_LABELS = [
-    'Buka Halaman Berikutnya 💛',
-    'Terus, Ada Lagi nih 🌸',
-    'Hampir Sampai... 💌',
-    '✓ Terima Kasih, Bee 🐝'
+    'Lembar Cerita Pertama 📬',
+    'Lanjut, Lembar Cerita ke2 ❤️',
+    'Lembaran Berikutnya 💖',
+    '✓ Selesai 😁✨'
 ];
 
 function buildProgress() {
@@ -669,7 +679,7 @@ function toggleMusic() {
     if (isPlaying) {
         audio.pause();
         isPlaying = false;
-        document.getElementById('musicLabel').textContent = '🎵 Play';
+        document.getElementById('musicLabel').textContent = '🎵 Putar Lagu';
         setWaves(false);
     } else {
         audio.play()
