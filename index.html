@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Bee 🍯💛</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --rose:   #e8567a;
+            --blush:  #f9a8c0;
+            --gold:   #f7c948;
+            --cream:  #fff8f0;
+            --deep:   #8b2252;
+            --text:   #4a2035;
+            --muted:  #9e7088;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(145deg, #fce4ec, #fdf3ff, #fff0e0, #fce4ec);
+            background-size: 400% 400%;
+            animation: bgFlow 12s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes bgFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ═══ PARTICLE CANVAS ═══ */
+        #particleCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ═══ CARD ═══ */
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 92%;
+            max-width: 520px;
+            background: rgba(255, 252, 255, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1.5px solid rgba(255, 200, 220, 0.6);
+            box-shadow:
+                0 30px 80px rgba(220, 60, 100, 0.18),
+                0 8px 24px rgba(0,0,0,0.06),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            padding: 40px 36px 36px;
+            text-align: center;
+        }
+
+        /* ═══ HEADER ═══ */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .sender-tag {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1rem;
+            color: var(--rose);
+            background: rgba(232, 86, 122, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(232, 86, 122, 0.25);
+            animation: tagFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes tagFloat {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-5px); }
+        }
+
+        /* ─ Music Button ─ */
+        .music-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(232, 86, 122, 0.1);
+            border: 1.5px solid rgba(232, 86, 122, 0.35);
+            color: var(--rose);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+        }
+        .music-btn:hover { background: var(--rose); color: white; }
+
+        .music-waves {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+            height: 14px;
+        }
+        .wave-bar {
+            width: 3px;
+            background: currentColor;
+            border-radius: 2px;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+        .wave-bar.playing {
+            opacity: 1;
+            animation: wave 0.8s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(1) { height: 6px;  animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+        .wave-bar:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
+        .wave-bar:nth-child(4) { height: 12px; animation-delay: 0.1s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50%       { transform: scaleY(1.4); }
+        }
+
+        /* ═══ BEE NAME ═══ */
+        .bee-name-wrap {
+            margin-bottom: 6px;
+        }
+
+        .bee-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .bee-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--deep), var(--rose), var(--gold));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: nameShimmer 4s ease infinite;
+            line-height: 1.1;
+        }
+
+        @keyframes nameShimmer {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bee-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.92rem;
+            color: var(--muted);
+            margin-top: 6px;
+            margin-bottom: 20px;
+        }
+
+        /* ═══ PROGRESS ═══ */
+        .progress-track {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .prog-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f5c6d8;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .prog-dot.done  { background: var(--blush); }
+        .prog-dot.now   { background: var(--rose); transform: scale(1.6); box-shadow: 0 0 0 3px rgba(232,86,122,0.2); }
+
+        .prog-line {
+            width: 28px;
+            height: 2px;
+            background: #f5c6d8;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+        .prog-line-fill {
+            height: 100%;
+            background: var(--rose);
+            width: 0%;
+            border-radius: 1px;
+            transition: width 0.6s ease;
+        }
+
+        /* ═══ STEP CONTENT ═══ */
+        .step-wrap {
+            min-height: 260px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .step.active { display: flex; }
+
+        .step-icon {
+            font-size: 62px;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+        .step-chapter {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--blush);
+            margin-bottom: 8px;
+        }
+
+        .step-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.85rem;
+            color: var(--deep);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .step-body {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.85;
+            background: rgba(252, 228, 236, 0.35);
+            border-left: 3px solid var(--blush);
+            border-radius: 0 12px 12px 0;
+            padding: 14px 16px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .step-body em {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .step-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--rose);
+            margin-top: 14px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: rgba(232, 86, 122, 0.07);
+            border: 1px dashed rgba(232, 86, 122, 0.3);
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ─ Final step ─ */
+        .final-seal {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose), var(--deep));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 14px;
+            box-shadow: 0 8px 28px rgba(232,86,122,0.4);
+            animation: sealPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes sealPulse {
+            0%, 100% { transform: scale(1);    box-shadow: 0 8px 28px rgba(232,86,122,0.4); }
+            50%       { transform: scale(1.07); box-shadow: 0 12px 36px rgba(232,86,122,0.55); }
+        }
+
+        .final-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: var(--deep);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .final-signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* ═══ NAV BUTTONS ═══ */
+        .nav-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 26px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            outline: none;
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, var(--rose), var(--deep));
+            color: white;
+            box-shadow: 0 6px 20px rgba(232, 86, 122, 0.38);
+        }
+        .btn-main:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 28px rgba(232, 86, 122, 0.48);
+        }
+        .btn-main:disabled { background: #f2ccd8; color: #c4a0b0; cursor: not-allowed; box-shadow: none; }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--rose);
+            border: 2px solid rgba(232,86,122,0.4);
+        }
+        .btn-ghost:hover:not(:disabled) {
+            background: rgba(232,86,122,0.08);
+            transform: translateY(-3px);
+            border-color: var(--rose);
+        }
+        .btn-ghost:disabled { color: #e8b4c4; border-color: #f0d0da; cursor: not-allowed; }
+
+        /* ═══ TRANSITION VEIL ═══ */
+        .veil {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,252,255,0.92);
+            border-radius: 32px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 5;
+        }
+        .veil.show { opacity: 1; }
+
+        /* ═══ ANIMATIONS ═══ */
+        @keyframes popIn {
+            0%   { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+            70%  { transform: scale(1.15) rotate(4deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(24px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .anim-pop   { animation: popIn   0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+        .anim-up    { animation: slideUp 0.45s ease both; }
+        .anim-up-d1 { animation: slideUp 0.45s 0.07s ease both; }
+        .anim-up-d2 { animation: slideUp 0.45s 0.14s ease both; }
+        .anim-up-d3 { animation: slideUp 0.45s 0.21s ease both; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 480px) {
+            .card       { padding: 28px 18px 24px; }
+            .bee-name   { font-size: 3rem; }
+            .step-icon  { font-size: 50px; }
+            .step-title { font-size: 1.55rem; }
+            .btn        { padding: 11px 22px; font-size: 0.83rem; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particleCanvas"></canvas>
+
+<div class="card" id="card">
+    <div class="veil" id="veil"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <span class="sender-tag">AlphaCyber4rt ✦</span>
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+            <span id="musicLabel">🎵 Play</span>
+            <div class="music-waves">
+                <div class="wave-bar" id="wb1"></div>
+                <div class="wave-bar" id="wb2"></div>
+                <div class="wave-bar" id="wb3"></div>
+                <div class="wave-bar" id="wb4"></div>
+            </div>
+        </button>
+    </div>
+
+    <!-- Bee Name -->
+    <div class="bee-name-wrap">
+        <p class="bee-label">Spesial untuk</p>
+        <h1 class="bee-name">Bee</h1>
+        <p class="bee-subtitle">Surat kecil yang terlalu lama tersimpan dalam hati 🍯</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-track" id="progressTrack"></div>
+
+    <!-- Steps -->
+    <div class="step-wrap">
+
+        <!-- STEP 1 -->
+        <div class="step active" id="step1">
+            <div class="step-icon anim-pop">🌼</div>
+            <p class="step-chapter anim-up">Halaman Pertama</p>
+            <h2 class="step-title anim-up-d1">Sejak Pertama Kali</h2>
+            <div class="step-body anim-up-d2">
+                Ada yang berubah diam-diam,<br>
+                sejak nama kamu mulai sering muncul di pikiranku. 🌸<br><br>
+                Bukan karena kamu sempurna —<br>
+                tapi justru karena cara kamu tertawa,<br>
+                cara kamu peduli, cara kamu <em>ada</em>...<br>
+                itu yang bikin aku susah pura-pura biasa. 🥺
+            </div>
+            <p class="step-quote anim-up-d3">"Kamu nggak tahu sudah berapa kali aku tersenyum sendiri gara-gara kamu." 💛</p>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" id="step2">
+            <div class="step-icon">🎶</div>
+            <p class="step-chapter">Halaman Kedua</p>
+            <h2 class="step-title">Hal-Hal Kecil tentang Kamu</h2>
+            <div class="step-body">
+                💬 Cara kamu balas pesan — singkat, tapi selalu hangat<br><br>
+                ✨ Cara kamu bilang <em>"jaga diri ya"</em> — kayak nggak mau aku kenapa-kenapa<br><br>
+                🌙 Cara kamu ada di pikiran aku justru di saat paling sepi<br><br>
+                😌 Dan cara kamu bikin segalanya terasa lebih ringan,<br>
+                hanya dengan kehadiran kamu
+            </div>
+            <p class="step-quote">"Hal-hal kecil tentang kamu, adalah hal-hal besar bagiku." 🌷</p>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" id="step3">
+            <div class="step-icon">💌</div>
+            <p class="step-chapter">Halaman Ketiga</p>
+            <h2 class="step-title">Yang Belum Pernah Aku Bilang</h2>
+            <div class="step-body">
+                Aku nggak pernah bilang secara langsung,<br>
+                karena takut salah — takut merusak yang ada. 🫣<br><br>
+                Tapi kalau aku jujur,<br>
+                kamu adalah alasan aku rajin buka HP pagi-pagi. 📱💕<br><br>
+                Kamu adalah satu nama yang bikin notifikasi terasa berbeda.<br>
+                Dan kamu adalah orang yang diam-diam aku doakan setiap malam. 🌙✨
+            </div>
+            <p class="step-quote">"Bukan soal berani atau tidak. Tapi soal kamu yang terlalu berharga untuk disembunyikan." 🍯</p>
+        </div>
+
+        <!-- STEP 4 (Final) -->
+        <div class="step" id="step4">
+            <div class="final-seal">🐝</div>
+            <p class="step-chapter">Halaman Terakhir</p>
+            <div class="final-message">
+                Bee,<br>
+                semoga kamu selalu bahagia —<br>
+                dengan atau tanpa aku. 💛
+            </div>
+            <div class="step-body" style="margin: 14px 0; text-align:center">
+                Aku mungkin cuma orang biasa di hidupmu.<br>
+                Tapi kamu, buat aku, bukan hal yang biasa. 🌟<br><br>
+                Makasih sudah ada,<br>
+                makasih sudah jadi <em>Bee</em>. 🍯✨
+            </div>
+            <p class="final-signature">— dengan sepenuh hati, seseorang yang peduli 🌸</p>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-row">
+        <button class="btn btn-ghost" id="btnPrev" onclick="go(-1)">← Kembali</button>
+        <button class="btn btn-main"  id="btnNext" onclick="go(1)">Buka Halaman Berikutnya 💛</button>
+    </div>
+</div>
+
+<audio id="audio" loop preload="none">
+    <source src="https://alphacyber4rt.github.io/File/DJikhlas.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ═══════════════════════════════
+   PARTICLE SYSTEM (hearts + petals)
+═══════════════════════════════ */
+const canvas = document.getElementById('particleCanvas');
+const ctx    = canvas.getContext('2d');
+let particles = [];
+
+function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const SYMBOLS = ['❤️','💛','🌸','💕','🍯','✨','💖','🌼','💗'];
+
+class Particle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x    = Math.random() * canvas.width;
+        this.y    = -40;
+        this.size = Math.random() * 18 + 10;
+        this.speedY = Math.random() * 1.4 + 0.6;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.sway  = Math.random() * Math.PI * 2;
+        this.swaySpeed = Math.random() * 0.02 + 0.01;
+        this.opacity = Math.random() * 0.5 + 0.4;
+        this.sym  = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+    }
+    update() {
+        this.sway += this.swaySpeed;
+        this.x += Math.sin(this.sway) * 0.8 + this.speedX;
+        this.y += this.speedY;
+        if (this.y > canvas.height + 50) this.reset();
+    }
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.font = `${this.size}px serif`;
+        ctx.fillText(this.sym, this.x, this.y);
+        ctx.restore();
+    }
+}
+
+function initParticles(count = 28) {
+    particles = [];
+    for (let i = 0; i < count; i++) {
+        const p = new Particle();
+        p.y = Math.random() * canvas.height;
+        particles.push(p);
+    }
+}
+
+function animLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animLoop);
+}
+
+initParticles();
+animLoop();
+
+/* ═══════════════════════════════
+   STEPS
+═══════════════════════════════ */
+const TOTAL   = 4;
+let current   = 1;
+let animating = false;
+
+const NEXT_LABELS = [
+    'Buka Halaman Berikutnya 💛',
+    'Terus, Ada Lagi nih 🌸',
+    'Hampir Sampai... 💌',
+    '✓ Terima Kasih, Bee 🐝'
+];
+
+function buildProgress() {
+    const track = document.getElementById('progressTrack');
+    track.innerHTML = '';
+    for (let i = 1; i <= TOTAL; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'prog-dot' +
+            (i < current ? ' done' : '') +
+            (i === current ? ' now' : '');
+        track.appendChild(dot);
+        if (i < TOTAL) {
+            const line = document.createElement('div');
+            line.className = 'prog-line';
+            const fill = document.createElement('div');
+            fill.className = 'prog-line-fill';
+            fill.style.width = i < current ? '100%' : '0%';
+            line.appendChild(fill);
+            track.appendChild(line);
+        }
+    }
+}
+
+function applyAnims() {
+    const step = document.getElementById('step' + current);
+    const icon = step.querySelector('.step-icon, .final-seal');
+    const els  = step.querySelectorAll('.step-chapter, .step-title, .final-message, .final-signature, .step-body, .step-quote');
+    if (icon) { icon.className = (icon.className.replace(/anim-\w+/g,'')).trim() + ' anim-pop'; }
+    els.forEach((el, i) => {
+        el.className = (el.className.replace(/anim-\w+/g,'')).trim() +
+            ` anim-up${['','-d1','-d2','-d3'][Math.min(i,3)]}`;
+    });
+}
+
+function go(dir) {
+    if (animating) return;
+    const next = current + dir;
+    if (next < 1 || next > TOTAL) return;
+
+    animating = true;
+    const veil = document.getElementById('veil');
+    veil.classList.add('show');
+
+    setTimeout(() => {
+        document.getElementById('step' + current).classList.remove('active');
+        current = next;
+        document.getElementById('step' + current).classList.add('active');
+        applyAnims();
+        buildProgress();
+        updateButtons();
+        veil.classList.remove('show');
+        animating = false;
+    }, 240);
+}
+
+function updateButtons() {
+    document.getElementById('btnPrev').disabled = current === 1;
+    const btnNext = document.getElementById('btnNext');
+    btnNext.disabled = current === TOTAL;
+    btnNext.textContent = NEXT_LABELS[current - 1];
+}
+
+/* ═══════════════════════════════
+   MUSIC
+═══════════════════════════════ */
+const audio     = document.getElementById('audio');
+let   isPlaying = false;
+
+function setWaves(on) {
+    [1,2,3,4].forEach(i => {
+        const el = document.getElementById('wb' + i);
+        el.classList.toggle('playing', on);
+    });
+}
+
+function toggleMusic() {
+    if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('musicLabel').textContent = '🎵 Play';
+        setWaves(false);
+    } else {
+        audio.play()
+            .then(() => {
+                isPlaying = true;
+                document.getElementById('musicLabel').textContent = '⏸ Pause';
+                setWaves(true);
+            })
+            .catch(() => {
+                document.getElementById('musicLabel').textContent = '⚠️ Gagal';
+            });
+    }
+}
+
+/* ═══════════════════════════════
+   INIT
+═══════════════════════════════ */
+buildProgress();
+updateButtons();
+applyAnims();
+</script>
+</body>
+</html>
