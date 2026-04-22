@@ -21,9 +21,9 @@
         body {
             min-height: 100vh;
             font-family: 'Lato', sans-serif;
-            background: linear-gradient(145deg, #fce4ec, #fdf3ff, #fff0e0, #fce4ec);
+            background: linear-gradient(145deg, #1c0422, #0d1530, #1a0828, #0d1530);
             background-size: 400% 400%;
-            animation: bgFlow 12s ease infinite;
+            animation: bgFlow 14s ease infinite;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,17 +51,24 @@
             z-index: 2;
             width: 92%;
             max-width: 520px;
-            background: rgba(255, 252, 255, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 251, 253, 0.97);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-radius: 32px;
-            border: 1.5px solid rgba(255, 200, 220, 0.6);
+            border: 1.5px solid rgba(255, 140, 170, 0.55);
             box-shadow:
-                0 30px 80px rgba(220, 60, 100, 0.18),
-                0 8px 24px rgba(0,0,0,0.06),
-                inset 0 1px 0 rgba(255,255,255,0.9);
+                0 0 50px rgba(232, 86, 122, 0.25),
+                0 30px 90px rgba(0, 0, 0, 0.55),
+                0 8px 24px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,1);
             padding: 40px 36px 36px;
             text-align: center;
+            animation: cardGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(232,86,122,0.2),  0 30px 90px rgba(0,0,0,0.5), inset 0 1px 0 white; }
+            50%       { box-shadow: 0 0 80px rgba(232,86,122,0.45), 0 30px 90px rgba(0,0,0,0.5), inset 0 1px 0 white; }
         }
 
         /* ═══ HEADER ═══ */
@@ -412,6 +419,17 @@
         .anim-up-d2 { animation: slideUp 0.45s 0.14s ease both; }
         .anim-up-d3 { animation: slideUp 0.45s 0.21s ease both; }
 
+        @keyframes sparkleFly {
+            0%   { transform: translate(0,0) scale(1.2); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+        }
+        .sparkle-el {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: sparkleFly 0.75s ease-out forwards;
+        }
+
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 600px) {
             body {
@@ -419,6 +437,9 @@
                 overflow-y: auto;
                 overflow-x: hidden;
                 padding: 20px 0 28px;
+                background: linear-gradient(160deg, #1c0422, #0d1530, #1a0828);
+                background-size: 100% 100%;
+                animation: none;
             }
             .card {
                 padding: 20px 16px 20px;
@@ -551,11 +572,10 @@
 
 <script>
 /* ═══════════════════════════════
-   PARTICLE SYSTEM (hearts + petals)
+   CANVAS SETUP
 ═══════════════════════════════ */
 const canvas = document.getElementById('particleCanvas');
 const ctx    = canvas.getContext('2d');
-let particles = [];
 
 function resize() {
     canvas.width  = window.innerWidth;
@@ -564,26 +584,53 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-const SYMBOLS = ['❤️','💛','🌸','💕','🍯','✨','💖','🌼','💗'];
+/* ─ Twinkling Stars ─ */
+const stars = Array.from({length: 90}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.6 + 0.2,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.04 + 0.008,
+    maxOp: Math.random() * 0.6 + 0.3,
+}));
 
-class Particle {
-    constructor() { this.reset(); }
-    reset() {
-        this.x    = Math.random() * canvas.width;
-        this.y    = -40;
-        this.size = Math.random() * 18 + 10;
-        this.speedY = Math.random() * 1.4 + 0.6;
-        this.speedX = (Math.random() - 0.5) * 0.6;
-        this.sway  = Math.random() * Math.PI * 2;
-        this.swaySpeed = Math.random() * 0.02 + 0.01;
-        this.opacity = Math.random() * 0.5 + 0.4;
-        this.sym  = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+function drawStars() {
+    stars.forEach(s => {
+        s.phase += s.speed;
+        const op = ((Math.sin(s.phase) + 1) / 2) * s.maxOp;
+        ctx.save();
+        ctx.globalAlpha = op;
+        ctx.fillStyle = '#fff';
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = 'rgba(255,200,230,0.8)';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    });
+}
+
+/* ─ Falling Hearts ─ */
+const SYMBOLS = ['❤️','💛','🌸','💕','💖','✨','💗','🌷','💝'];
+
+class Heart {
+    constructor(init = false) { this.reset(init); }
+    reset(init = false) {
+        this.x       = Math.random() * canvas.width;
+        this.y       = init ? Math.random() * canvas.height : -50;
+        this.size    = Math.random() * 24 + 14;
+        this.speedY  = Math.random() * 1.2 + 0.5;
+        this.speedX  = (Math.random() - 0.5) * 0.5;
+        this.sway    = Math.random() * Math.PI * 2;
+        this.swaySpd = Math.random() * 0.025 + 0.01;
+        this.opacity = Math.random() * 0.55 + 0.45;
+        this.sym     = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
     }
     update() {
-        this.sway += this.swaySpeed;
-        this.x += Math.sin(this.sway) * 0.8 + this.speedX;
-        this.y += this.speedY;
-        if (this.y > canvas.height + 50) this.reset();
+        this.sway += this.swaySpd;
+        this.x    += Math.sin(this.sway) * 0.9 + this.speedX;
+        this.y    += this.speedY;
+        if (this.y > canvas.height + 60) this.reset();
     }
     draw() {
         ctx.save();
@@ -594,23 +641,38 @@ class Particle {
     }
 }
 
-function initParticles(count = 28) {
-    particles = [];
-    for (let i = 0; i < count; i++) {
-        const p = new Particle();
-        p.y = Math.random() * canvas.height;
-        particles.push(p);
-    }
-}
+const hearts = Array.from({length: 28}, () => new Heart(true));
 
 function animLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
+    drawStars();
+    hearts.forEach(h => { h.update(); h.draw(); });
     requestAnimationFrame(animLoop);
 }
-
-initParticles();
 animLoop();
+
+/* ─ Sparkle Burst on Step Change ─ */
+const SPARKLE_SYMS = ['✨','💛','🌸','💖','⭐','🌟'];
+function spawnSparkles(btn) {
+    const rect = btn.getBoundingClientRect();
+    const cx   = rect.left + rect.width / 2;
+    const cy   = rect.top  + rect.height / 2;
+    for (let i = 0; i < 9; i++) {
+        const el    = document.createElement('span');
+        const angle = (i / 9) * Math.PI * 2;
+        const dist  = Math.random() * 55 + 25;
+        el.className   = 'sparkle-el';
+        el.textContent = SPARKLE_SYMS[Math.floor(Math.random() * SPARKLE_SYMS.length)];
+        el.style.cssText = `
+            left:${cx}px; top:${cy}px;
+            font-size:${Math.random()*10+10}px;
+            --dx:${Math.cos(angle)*dist}px;
+            --dy:${Math.sin(angle)*dist}px;
+        `;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 800);
+    }
+}
 
 /* ═══════════════════════════════
    STEPS
@@ -662,6 +724,11 @@ function go(dir) {
     if (animating) return;
     const next = current + dir;
     if (next < 1 || next > TOTAL) return;
+
+    const triggerBtn = dir > 0
+        ? document.getElementById('btnNext')
+        : document.getElementById('btnPrev');
+    spawnSparkles(triggerBtn);
 
     animating = true;
     const veil = document.getElementById('veil');
